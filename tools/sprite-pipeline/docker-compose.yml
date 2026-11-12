@@ -1,0 +1,11 @@
+services:
+  sprite:
+    build: .
+    # One shared image for every project: it only holds Python + Pillow + numpy.
+    image: sprite-pipeline:latest
+    volumes:
+      - ./output:/out
+      - ./generate_sprite.py:/app/generate_sprite.py:ro
+      - ./sprite_engine.py:/app/sprite_engine.py:ro
+    environment:
+      OUT_DIR: /out

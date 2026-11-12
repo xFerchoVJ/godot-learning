@@ -1,0 +1,65 @@
+[gd_scene format=3 uid="uid://kif6ahipw8sg"]
+
+[ext_resource type="Script" uid="uid://d30vyypjlqqw3" path="res://scripts/bat.gd" id="1_cnldk"]
+[ext_resource type="Texture2D" uid="uid://dvdamdcrx2hli" path="res://assets/characters/bat/spritesheet.png" id="1_uhqni"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cnldk"]
+atlas = ExtResource("1_uhqni")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_48wkk"]
+atlas = ExtResource("1_uhqni")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ss3tx"]
+atlas = ExtResource("1_uhqni")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lv0ya"]
+atlas = ExtResource("1_uhqni")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yuy0x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnldk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_48wkk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ss3tx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lv0ya")
+}],
+"loop": 1,
+"name": &"fly",
+"speed": 8.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_77rpj"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yuy0x"]
+radius = 7.0
+
+[node name="Bat" type="CharacterBody2D" unique_id=1235479030 groups=["bat"]]
+script = ExtResource("1_cnldk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=712663318]
+sprite_frames = SubResource("SpriteFrames_yuy0x")
+animation = &"fly"
+autoplay = "fly"
+frame_progress = 0.0580916
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=19593019]
+shape = SubResource("CircleShape2D_77rpj")
+
+[node name="Hitbox" type="Area2D" parent="." unique_id=301640154]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1956581893]
+shape = SubResource("CircleShape2D_yuy0x")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]

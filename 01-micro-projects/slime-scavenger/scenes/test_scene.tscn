@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://cvt8ctp5kii3v"]
+
+[ext_resource type="PackedScene" uid="uid://bwiawsgndsjlt" path="res://scenes/player.tscn" id="1_j8ivh"]
+[ext_resource type="Script" uid="uid://d0ubdbeqhfb2i" path="res://scripts/test_scene.gd" id="1_nd71p"]
+[ext_resource type="PackedScene" uid="uid://555xuf10outc" path="res://scenes/gem.tscn" id="2_nd71p"]
+[ext_resource type="PackedScene" uid="uid://kif6ahipw8sg" path="res://scenes/bat.tscn" id="4_7ddre"]
+[ext_resource type="AudioStream" uid="uid://drp01vn7gwstb" path="res://assets/audio/gem_collect.wav" id="6_h3xc6"]
+[ext_resource type="AudioStream" uid="uid://bnhrluyh36xyb" path="res://assets/audio/lose.wav" id="7_s36qc"]
+[ext_resource type="AudioStream" uid="uid://cppqhd0jyf8t" path="res://assets/audio/restart.wav" id="8_6qxox"]
+[ext_resource type="AudioStream" uid="uid://bd67krte8sh5e" path="res://assets/audio/win.wav" id="9_gthg3"]
+[ext_resource type="PackedScene" path="res://scenes/level_map.tscn" id="9_map"]
+
+[node name="TestScene" type="Node2D" unique_id=114771699]
+script = ExtResource("1_nd71p")
+
+[node name="Map" parent="." unique_id=1300879375 instance=ExtResource("9_map")]
+
+[node name="Player" parent="." unique_id=1393142090 instance=ExtResource("1_j8ivh")]
+position = Vector2(40, 100)
+
+[node name="Gem" parent="." unique_id=296022864 instance=ExtResource("2_nd71p")]
+position = Vector2(60, 56)
+
+[node name="Label" type="Label" parent="." unique_id=2072111153]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Gem2" parent="." unique_id=1178025460 instance=ExtResource("2_nd71p")]
+position = Vector2(136, 136)
+
+[node name="Gem3" parent="." unique_id=21148016 instance=ExtResource("2_nd71p")]
+position = Vector2(232, 100)
+
+[node name="Gem4" parent="." unique_id=284524350 instance=ExtResource("2_nd71p")]
+position = Vector2(270, 52)
+
+[node name="Gem5" parent="." unique_id=366886774 instance=ExtResource("2_nd71p")]
+position = Vector2(190, 76)
+
+[node name="Bat" parent="." unique_id=1235479030 instance=ExtResource("4_7ddre")]
+position = Vector2(28, 30)
+speed = 80.0
+point_a = Vector2(28, 30)
+point_b = Vector2(150, 30)
+
+[node name="Bat2" parent="." unique_id=1310470097 instance=ExtResource("4_7ddre")]
+position = Vector2(292, 136)
+speed = 70.0
+point_a = Vector2(292, 136)
+point_b = Vector2(28, 136)
+
+[node name="Bat3" parent="." unique_id=1067353348 instance=ExtResource("4_7ddre")]
+position = Vector2(190, 112)
+speed = 70.0
+point_a = Vector2(190, 112)
+point_b = Vector2(190, 28)
+
+[node name="Timer" type="Timer" parent="." unique_id=1231522141]
+one_shot = true
+
+[node name="Label2" type="Label" parent="." unique_id=664041303]
+offset_left = 148.0
+offset_right = 188.0
+offset_bottom = 23.0
+
+[node name="Audios" type="Node" parent="." unique_id=908314820]
+
+[node name="gem_collect" type="AudioStreamPlayer" parent="Audios" unique_id=1485801117]
+stream = ExtResource("6_h3xc6")
+
+[node name="lose" type="AudioStreamPlayer" parent="Audios" unique_id=1144336792]
+stream = ExtResource("7_s36qc")
+
+[node name="restart" type="AudioStreamPlayer" parent="Audios" unique_id=438646824]
+stream = ExtResource("8_6qxox")
+
+[node name="win" type="AudioStreamPlayer" parent="Audios" unique_id=553393048]
+stream = ExtResource("9_gthg3")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="Audios/restart" to="." method="_on_restart_finished"]
